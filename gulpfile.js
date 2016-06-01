@@ -53,6 +53,7 @@ gulp.task('test', ['pre-test'], function (cb) {
 
 gulp.task('watch', function () {
   gulp.watch(['lib/**/*.js', 'test/**'], ['test']);
+  gulp.watch(['lib/**/*.js'], ['babel']);
 });
 
 gulp.task('babel', ['clean'], function () {

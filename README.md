@@ -1,18 +1,29 @@
-# test-wavebreak [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# test-wavebreak [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > coding exercise from Wavebreak Media
 
 ## Installation
 
 ```sh
-$ npm install --save test-wavebreak
+$ npm install
 ```
+
+## Assumptions
+
+A few assumptions have been made for the test :
+
+  - The period can have multiple months and therefore must generate multiple payslips
+  - The csv files are always constructed with the same order : (first name, last name, annual Salary, pension rate %, period)
 
 ## Usage
 
-```js
-var testWavebreak = require('test-wavebreak');
+```sh
+$ node start ./path/to/file.csv
+```
 
-testWavebreak('Rainbow');
+the result will be created under 
+
+```sh
+$ ./path/to/file-payslips.csv
 ```
 ## License
 
