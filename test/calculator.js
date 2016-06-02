@@ -1,10 +1,6 @@
 import Calculator from '../lib/calculator';
-import chai from 'chai';
-import spies from 'chai-spies';
+import {expect} from 'chai';
 
-chai.use(spies);
-
-let expect = chai.expect;
 
 describe('Calculator object', function () {
   let calculator;
@@ -106,13 +102,45 @@ describe('Calculator object', function () {
     });
   });
 
-  describe('payslip method',function () {
-    beforeEach(function () {
-      it('should be defined', function () {
-        expect(calculator).to.have.property('payslip');
-        expect(calculator.payslip).to.be.a('function');
-      });
-    })
+  describe('payslip method', function () {
+    it('should be defined', function () {
+      expect(calculator).to.have.property('payslip');
+      expect(calculator.payslip).to.be.a('function');
+    });
+
+    it('should generate an Array of payslip object from an employeeData object', function () {
+      const employeeData = {
+        firstName: 'Bastien',
+        lastName: 'Allegret',
+        rate: '9%',
+        salary: '50000',
+        period: '01 May 31 May'
+      };
+      expect(calculator.payslip.bind(calculator,employeeData)).not.to.throw(Error);
+
+      let payslip = calculator.payslip(employeeData);
+      expect(payslip).to.exist;
+      expect(payslip).not.to.be.empty;
+      expect(payslip[0]).to.have.property('name');
+      expect(payslip[0]).to.have.property('period');
+      expect(payslip[0]).to.have.property('grossIncome');
+      expect(payslip[0]).to.have.property('incomeTax');
+      expect(payslip[0]).to.have.property('netIncome');
+      expect(payslip[0]).to.have.property('pensionContribution');
+    });
+  });
+
+  describe('transform method', function () {
+    it('should be defined', function () {
+      expect(calculator).to.have.property('transform');
+      expect(calculator.transform).to.be.a('function');
+    });
+
+
+    it('should have a _transform method from stream.Transform', function () {
+      expect(calculator.transform()).to.have.property('_transform');
+      expect(calculator.transform()._transform).to.be.a('function');
+    });
   })
 });
 
